@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagram="http://www.metamatrix.com/metamodels/Diagram" xmlns:mmcore="http://www.metamatrix.com/metamodels/Core" xmlns:mmws="http://www.metamatrix.com/metamodels/WebService" xmlns:transformation="http://www.metamatrix.com/metamodels/Transformation">
+  <mmcore:ModelAnnotation xmi:uuid="mmuuid:3a3e798c-ce7b-4145-9d86-86a832d801a5" primaryMetamodelUri="http://www.metamatrix.com/metamodels/WebService" modelType="VIRTUAL" ProducerName="Teiid Designer" ProducerVersion="9.0.1.Final-v20150211-1407-B643">
+    <modelImports xmi:uuid="mmuuid:19c626f5-131c-4c88-936a-435e687816a2" name="flight_svc_responses" modelLocation="flight_svc_responses.xmi" uuid="mmuuid:e2dc78dd-02ca-4f5f-b986-21f5dd97c523" modelType="VIRTUAL" primaryMetamodelUri="http://www.metamatrix.com/metamodels/XmlDocument"/>
+    <modelImports xmi:uuid="mmuuid:8c733862-fbe1-471c-8500-b33df644269e" name="AcmeDemoService_schema1" modelLocation="web_services/AcmeDemoService_schema1.xsd" modelType="TYPE" primaryMetamodelUri="http://www.eclipse.org/xsd/2002/XSD"/>
+    <modelImports xmi:uuid="mmuuid:fb615da6-24fb-44c0-8633-7ca05871c012" name="flights_view" modelLocation="../views/flights_view.xmi" uuid="mmuuid:e1e1f3a6-de93-4dfc-9f85-38c4e02ad06f" modelType="VIRTUAL" primaryMetamodelUri="http://www.metamatrix.com/metamodels/Relational"/>
+  </mmcore:ModelAnnotation>
+  <mmws:Interface xmi:uuid="mmuuid:ae9434e2-dfe5-49b1-9e40-4cc6fc2b83f9" name="AcmeDemoInterface">
+    <operations xmi:uuid="mmuuid:376e925e-d4b7-4ec8-9cbc-d788fda9de68" name="listAvailablePlanes">
+      <input xmi:uuid="mmuuid:4fb2a817-402e-471c-8ec9-fbd949d94cda" name="listAvailablePlanes">
+        <contentElement href="web_services/AcmeDemoService_schema1.xsd#//listAvailablePlanes;XSDElementDeclaration=4"/>
+      </input>
+      <output xmi:uuid="mmuuid:2babef53-8ac6-42a8-b208-d7967c57fd21" name="listAvailablePlanesResponse">
+        <contentElement href="web_services/AcmeDemoService_schema1.xsd#//listAvailablePlanesResponse;XSDElementDeclaration=5"/>
+        <samples xmi:uuid="mmuuid:947f6baf-44a6-4c52-8762-2f899ab5779e"/>
+        <xmlDocument href="flight_svc_responses.xmi#mmuuid/1f0a6afc-717e-48e5-b71e-254f2a3c1d67"/>
+      </output>
+    </operations>
+  </mmws:Interface>
+  <transformation:TransformationContainer xmi:uuid="mmuuid:b02e9cd5-694c-4c8b-9307-95d14e4b246b">
+    <transformationMappings xsi:type="transformation:SqlTransformationMappingRoot" xmi:uuid="mmuuid:9a446f0e-97f4-4d99-a8a8-7d38b4bf5440" outputs="mmuuid/376e925e-d4b7-4ec8-9cbc-d788fda9de68" target="mmuuid/376e925e-d4b7-4ec8-9cbc-d788fda9de68">
+      <helper xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:93b70a49-1820-41ca-a499-2f2aec956762">
+        <nested xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:5d61b51b-4b12-4295-9d31-a7caab0decea" selectSql="BEGIN&#xa;&#x9;DECLARE string VARIABLES.IN_endDate;&#xa;&#x9;VARIABLES.IN_endDate = xpathValue(flight_svc.AcmeDemoInterface.listAvailablePlanes.listAvailablePlanes, '/*:listAvailablePlanes/*:in/*:endDate');&#xa;&#x9;DECLARE string VARIABLES.IN_startDate;&#xa;&#x9;VARIABLES.IN_startDate = xpathValue(flight_svc.AcmeDemoInterface.listAvailablePlanes.listAvailablePlanes, '/*:listAvailablePlanes/*:in/*:startDate');&#xa;&#x9;DECLARE string VARIABLES.IN_endCity;&#xa;&#x9;VARIABLES.IN_endCity = xpathValue(flight_svc.AcmeDemoInterface.listAvailablePlanes.listAvailablePlanes, '/*:listAvailablePlanes/*:in/*:endCity');&#xa;&#x9;DECLARE string VARIABLES.IN_startCity;&#xa;&#x9;VARIABLES.IN_startCity = xpathValue(flight_svc.AcmeDemoInterface.listAvailablePlanes.listAvailablePlanes, '/*:listAvailablePlanes/*:in/*:startCity');&#xa;&#x9;SELECT * FROM flight_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse WHERE (flight_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse.listAvailablePlanesResponse.&quot;return&quot;.travelDate = VARIABLES.IN_endDate) AND (flight_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse.listAvailablePlanesResponse.&quot;return&quot;.travelDate = VARIABLES.IN_startDate) AND (flight_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse.listAvailablePlanesResponse.&quot;return&quot;.targetCity = VARIABLES.IN_endCity) AND (flight_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse.listAvailablePlanesResponse.&quot;return&quot;.startCity = VARIABLES.IN_startCity);&#xa;END"/>
+        <aliases xmi:uuid="mmuuid:19e97222-ddc4-42f5-8692-e9e003935f83" alias="AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse">
+          <aliasedObject href="flight_svc_responses.xmi#mmuuid/1f0a6afc-717e-48e5-b71e-254f2a3c1d67"/>
+        </aliases>
+        <aliases xmi:uuid="mmuuid:fce51600-cef7-4d33-b134-9083d555c06d" alias="flight_info">
+          <aliasedObject href="../views/flights_view.xmi#mmuuid/2595c1db-33ac-489b-88ba-aecbca005985"/>
+        </aliases>
+      </helper>
+      <nested xsi:type="transformation:TransformationMapping" xmi:uuid="mmuuid:5588e70e-bbab-4e8e-b1ad-7ba04888c816" outputs="mmuuid/947f6baf-44a6-4c52-8762-2f899ab5779e"/>
+      <inputs href="flight_svc_responses.xmi#mmuuid/1f0a6afc-717e-48e5-b71e-254f2a3c1d67"/>
+      <inputs href="../views/flights_view.xmi#mmuuid/2595c1db-33ac-489b-88ba-aecbca005985"/>
+    </transformationMappings>
+  </transformation:TransformationContainer>
+  <mmcore:AnnotationContainer xmi:uuid="mmuuid:c120cee4-600d-4dd0-95ed-f32e2bffae5f"/>
+  <diagram:DiagramContainer xmi:uuid="mmuuid:39048a72-9b51-4076-8a9a-dfd78beda56a">
+    <diagram xmi:uuid="mmuuid:7ae2261b-a4bc-45f8-961c-5670967ca530" type="packageDiagramType" target="mmuuid/3a3e798c-ce7b-4145-9d86-86a832d801a5">
+      <diagramEntity xmi:uuid="mmuuid:d4ae492e-309d-4b9d-93c3-e51268b66541" modelObject="mmuuid/ae9434e2-dfe5-49b1-9e40-4cc6fc2b83f9" xPosition="10" yPosition="10"/>
+    </diagram>
+    <diagram xmi:uuid="mmuuid:5d0c6a5a-08fa-4fc8-a25c-cf30d474d1b0" type="packageDiagramType" target="mmuuid/ae9434e2-dfe5-49b1-9e40-4cc6fc2b83f9">
+      <diagramEntity xmi:uuid="mmuuid:00d5ba15-560e-48b1-8b40-141faf6e281e" modelObject="mmuuid/376e925e-d4b7-4ec8-9cbc-d788fda9de68" xPosition="10" yPosition="10"/>
+    </diagram>
+  </diagram:DiagramContainer>
+</xmi:XMI>

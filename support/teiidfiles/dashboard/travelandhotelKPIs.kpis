@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kpis>
+  <dataprovider code="dataprovider_27401433185450979" type="sql">
+    <description language="en">FandH-Flight_Bookings</description>
+    <sqlprovider>
+      <datasource>TravelVDB</datasource>
+      <query type="default">Select * from Flight_Bookings</query>
+      <query type="teiid">Select a.booking_id, a.flight_no, a.departs, a.arrives, b.airline, b.origin, b.destination, b.price  from Flight_Bookings as a, Flight_Info as b where a.flight_no = b.flight_no</query>
+    </sqlprovider>
+    <dataproperties>
+      <dataproperty id="booking_id">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">booking_id</name>
+        <name language="zh">booking_id</name>
+        <name language="ja">booking_id</name>
+        <name language="en">booking_ref_num</name>
+        <name language="es">booking_id</name>
+        <name language="de">booking_id</name>
+        <name language="pt">booking_id</name>
+      </dataproperty>
+      <dataproperty id="flight_no">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">flight_no</name>
+        <name language="zh">flight_no</name>
+        <name language="ja">flight_no</name>
+        <name language="en">flight_no</name>
+        <name language="es">flight_no</name>
+        <name language="de">flight_no</name>
+        <name language="pt">flight_no</name>
+      </dataproperty>
+      <dataproperty id="departs">
+        <domain>org.jboss.dashboard.domain.date.DateDomain</domain>
+        <name language="fr">departs</name>
+        <name language="zh">departs</name>
+        <name language="ja">departs</name>
+        <name language="en">departs</name>
+        <name language="es">departs</name>
+        <name language="de">departs</name>
+        <name language="pt">departs</name>
+      </dataproperty>
+      <dataproperty id="arrives">
+        <domain>org.jboss.dashboard.domain.date.DateDomain</domain>
+        <name language="fr">arrives</name>
+        <name language="zh">arrives</name>
+        <name language="ja">arrives</name>
+        <name language="en">arrives</name>
+        <name language="es">arrives</name>
+        <name language="de">arrives</name>
+        <name language="pt">arrives</name>
+      </dataproperty>
+      <dataproperty id="airline">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+      </dataproperty>
+      <dataproperty id="origin">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+      </dataproperty>
+      <dataproperty id="destination">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+      </dataproperty>
+      <dataproperty id="price">
+        <domain>org.jboss.dashboard.domain.numeric.NumericDomain</domain>
+      </dataproperty>
+    </dataproperties>
+  </dataprovider>
+  <dataprovider code="dataprovider_7451433185336839" type="sql">
+    <description language="en">FandH-Flight_Info</description>
+    <sqlprovider>
+      <datasource>TravelVDB</datasource>
+      <query type="teiid">Select * from flight_info</query>
+      <query type="default">Select * from flight_info</query>
+    </sqlprovider>
+    <dataproperties>
+      <dataproperty id="flight_no">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">flight_no</name>
+        <name language="zh">flight_no</name>
+        <name language="ja">flight_no</name>
+        <name language="en">flight_no</name>
+        <name language="es">flight_no</name>
+        <name language="de">flight_no</name>
+        <name language="pt">flight_no</name>
+      </dataproperty>
+      <dataproperty id="airline">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">airline</name>
+        <name language="zh">airline</name>
+        <name language="ja">airline</name>
+        <name language="en">airline</name>
+        <name language="es">airline</name>
+        <name language="de">airline</name>
+        <name language="pt">airline</name>
+      </dataproperty>
+      <dataproperty id="origin">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">origin</name>
+        <name language="zh">origin</name>
+        <name language="ja">origin</name>
+        <name language="en">origin</name>
+        <name language="es">origin</name>
+        <name language="de">origin</name>
+        <name language="pt">origin</name>
+      </dataproperty>
+      <dataproperty id="destination">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">destination</name>
+        <name language="zh">destination</name>
+        <name language="ja">destination</name>
+        <name language="en">destination</name>
+        <name language="es">destination</name>
+        <name language="de">destination</name>
+        <name language="pt">destination</name>
+      </dataproperty>
+      <dataproperty id="price">
+        <domain>org.jboss.dashboard.domain.numeric.NumericDomain</domain>
+        <name language="fr">price</name>
+        <name language="zh">price</name>
+        <name language="ja">price</name>
+        <name language="en">price</name>
+        <name language="es">price</name>
+        <name language="de">price</name>
+        <name language="pt">price</name>
+      </dataproperty>
+      <dataproperty id="departs">
+        <domain>org.jboss.dashboard.domain.date.DateDomain</domain>
+        <name language="fr">departs</name>
+        <name language="zh">departs</name>
+        <name language="ja">departs</name>
+        <name language="en">departs</name>
+        <name language="es">departs</name>
+        <name language="de">departs</name>
+        <name language="pt">departs</name>
+      </dataproperty>
+      <dataproperty id="arrives">
+        <domain>org.jboss.dashboard.domain.date.DateDomain</domain>
+        <name language="fr">arrives</name>
+        <name language="zh">arrives</name>
+        <name language="ja">arrives</name>
+        <name language="en">arrives</name>
+        <name language="es">arrives</name>
+        <name language="de">arrives</name>
+        <name language="pt">arrives</name>
+      </dataproperty>
+    </dataproperties>
+  </dataprovider>
+  <dataprovider code="dataprovider_43111433185509354" type="sql">
+    <description language="en">FandH-Hotel_Bookings</description>
+    <sqlprovider>
+      <datasource>TravelVDB</datasource>
+      <query type="default">Select * from Hotel_Bookings</query>
+      <query type="teiid">Select a.booking_id, a.hotel_id, a.arrive, a.depart, b.hotel_name, b.city, b.rate  from Hotel_Bookings as a, Hotel_Info as b where a.hotel_id = b.hotel_id</query>
+    </sqlprovider>
+    <dataproperties>
+      <dataproperty id="booking_id">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">booking_id</name>
+        <name language="zh">booking_id</name>
+        <name language="ja">booking_id</name>
+        <name language="en">booking_ref_num</name>
+        <name language="es">booking_id</name>
+        <name language="de">booking_id</name>
+        <name language="pt">booking_id</name>
+      </dataproperty>
+      <dataproperty id="hotel_id">
+        <domain>org.jboss.dashboard.domain.numeric.NumericDomain</domain>
+        <name language="fr">hotel_id</name>
+        <name language="zh">hotel_id</name>
+        <name language="ja">hotel_id</name>
+        <name language="en">hotel_id</name>
+        <name language="es">hotel_id</name>
+        <name language="de">hotel_id</name>
+        <name language="pt">hotel_id</name>
+      </dataproperty>
+      <dataproperty id="arrive">
+        <domain>org.jboss.dashboard.domain.date.DateDomain</domain>
+        <name language="fr">arrive</name>
+        <name language="zh">arrive</name>
+        <name language="ja">arrive</name>
+        <name language="en">arrive</name>
+        <name language="es">arrive</name>
+        <name language="de">arrive</name>
+        <name language="pt">arrive</name>
+      </dataproperty>
+      <dataproperty id="depart">
+        <domain>org.jboss.dashboard.domain.date.DateDomain</domain>
+        <name language="fr">depart</name>
+        <name language="zh">depart</name>
+        <name language="ja">depart</name>
+        <name language="en">depart</name>
+        <name language="es">depart</name>
+        <name language="de">depart</name>
+        <name language="pt">depart</name>
+      </dataproperty>
+      <dataproperty id="hotel_name">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+      </dataproperty>
+      <dataproperty id="city">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+      </dataproperty>
+      <dataproperty id="rate">
+        <domain>org.jboss.dashboard.domain.numeric.NumericDomain</domain>
+      </dataproperty>
+    </dataproperties>
+  </dataprovider>
+  <dataprovider code="dataprovider_27291433185414788" type="sql">
+    <description language="en">FandH-Hotel_Info</description>
+    <sqlprovider>
+      <datasource>TravelVDB</datasource>
+<query>Select * from Hotel_Info</query>
+    </sqlprovider>
+    <dataproperties>
+      <dataproperty id="hotel_id">
+        <domain>org.jboss.dashboard.domain.numeric.NumericDomain</domain>
+        <name language="fr">hotel_id</name>
+        <name language="zh">hotel_id</name>
+        <name language="ja">hotel_id</name>
+        <name language="en">hotel_id</name>
+        <name language="es">hotel_id</name>
+        <name language="de">hotel_id</name>
+        <name language="pt">hotel_id</name>
+      </dataproperty>
+      <dataproperty id="hotel_name">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">hotel_name</name>
+        <name language="zh">hotel_name</name>
+        <name language="ja">hotel_name</name>
+        <name language="en">hotel_name</name>
+        <name language="es">hotel_name</name>
+        <name language="de">hotel_name</name>
+        <name language="pt">hotel_name</name>
+      </dataproperty>
+      <dataproperty id="rate">
+        <domain>org.jboss.dashboard.domain.numeric.NumericDomain</domain>
+        <name language="fr">rate</name>
+        <name language="zh">rate</name>
+        <name language="ja">rate</name>
+        <name language="en">rate</name>
+        <name language="es">rate</name>
+        <name language="de">rate</name>
+        <name language="pt">rate</name>
+      </dataproperty>
+      <dataproperty id="city">
+        <domain>org.jboss.dashboard.domain.label.LabelDomain</domain>
+        <name language="fr">city</name>
+        <name language="zh">city</name>
+        <name language="ja">city</name>
+        <name language="en">city</name>
+        <name language="es">city</name>
+        <name language="de">city</name>
+        <name language="pt">city</name>
+      </dataproperty>
+    </dataproperties>
+  </dataprovider>
+  <kpi code="kpi_22381433185545601">
+    <description language="en">Available Flight Info</description>
+    <provider code="dataprovider_7451433185336839" />
+    <displayer type="table" renderer="default">
+      <rowsperpage>10</rowsperpage>
+      <headerposition>top</headerposition>
+      <htmlstyle>border: 1px solid #000000; padding:0; text-align:center;</htmlstyle>
+      <htmlclass>skn-table_border</htmlclass>
+      <rowevenclass>skn-even_row</rowevenclass>
+      <rowoddclass>skn-odd_row</rowoddclass>
+      <rowhoverclass>skn-even_row_alt</rowhoverclass>
+      <column>
+        <modelproperty>flight_no</modelproperty>
+        <viewindex>0</viewindex>
+        <name language="fr">flight_no</name>
+        <name language="zh">flight_no</name>
+        <name language="ja">flight_no</name>
+        <name language="en">flight_no</name>
+        <name language="es">flight_no</name>
+        <name language="de">flight_no</name>
+        <name language="pt">flight_no</name>
+        <hint language="fr">flight_no</hint>
+        <hint language="zh">flight_no</hint>
+        <hint language="ja">flight_no</hint>
+        <hint language="en">flight_no</hint>
+        <hint language="es">flight_no</hint>
+        <hint language="de">flight_no</hint>
+        <hint language="pt">flight_no</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>airline</modelproperty>
+        <viewindex>1</viewindex>
+        <name language="fr">airline</name>
+        <name language="zh">airline</name>
+        <name language="ja">airline</name>
+        <name language="en">airline</name>
+        <name language="es">airline</name>
+        <name language="de">airline</name>
+        <name language="pt">airline</name>
+        <hint language="fr">airline</hint>
+        <hint language="zh">airline</hint>
+        <hint language="ja">airline</hint>
+        <hint language="en">airline</hint>
+        <hint language="es">airline</hint>
+        <hint language="de">airline</hint>
+        <hint language="pt">airline</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>origin</modelproperty>
+        <viewindex>2</viewindex>
+        <name language="fr">origin</name>
+        <name language="zh">origin</name>
+        <name language="ja">origin</name>
+        <name language="en">origin</name>
+        <name language="es">origin</name>
+        <name language="de">origin</name>
+        <name language="pt">origin</name>
+        <hint language="fr">origin</hint>
+        <hint language="zh">origin</hint>
+        <hint language="ja">origin</hint>
+        <hint language="en">origin</hint>
+        <hint language="es">origin</hint>
+        <hint language="de">origin</hint>
+        <hint language="pt">origin</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>destination</modelproperty>
+        <viewindex>3</viewindex>
+        <name language="fr">destination</name>
+        <name language="zh">destination</name>
+        <name language="ja">destination</name>
+        <name language="en">destination</name>
+        <name language="es">destination</name>
+        <name language="de">destination</name>
+        <name language="pt">destination</name>
+        <hint language="fr">destination</hint>
+        <hint language="zh">destination</hint>
+        <hint language="ja">destination</hint>
+        <hint language="en">destination</hint>
+        <hint language="es">destination</hint>
+        <hint language="de">destination</hint>
+        <hint language="pt">destination</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>price</modelproperty>
+        <viewindex>4</viewindex>
+        <name language="fr">price</name>
+        <name language="zh">price</name>
+        <name language="ja">price</name>
+        <name language="en">price</name>
+        <name language="es">price</name>
+        <name language="de">price</name>
+        <name language="pt">price</name>
+        <hint language="fr">price</hint>
+        <hint language="zh">price</hint>
+        <hint language="ja">price</hint>
+        <hint language="en">price</hint>
+        <hint language="es">price</hint>
+        <hint language="de">price</hint>
+        <hint language="pt">price</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>departs</modelproperty>
+        <viewindex>5</viewindex>
+        <name language="fr">departs</name>
+        <name language="zh">departs</name>
+        <name language="ja">departs</name>
+        <name language="en">departs</name>
+        <name language="es">departs</name>
+        <name language="de">departs</name>
+        <name language="pt">departs</name>
+        <hint language="fr">departs</hint>
+        <hint language="zh">departs</hint>
+        <hint language="ja">departs</hint>
+        <hint language="en">departs</hint>
+        <hint language="es">departs</hint>
+        <hint language="de">departs</hint>
+        <hint language="pt">departs</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>arrives</modelproperty>
+        <viewindex>6</viewindex>
+        <name language="fr">arrives</name>
+        <name language="zh">arrives</name>
+        <name language="ja">arrives</name>
+        <name language="en">arrives</name>
+        <name language="es">arrives</name>
+        <name language="de">arrives</name>
+        <name language="pt">arrives</name>
+        <hint language="fr">arrives</hint>
+        <hint language="zh">arrives</hint>
+        <hint language="ja">arrives</hint>
+        <hint language="en">arrives</hint>
+        <hint language="es">arrives</hint>
+        <hint language="de">arrives</hint>
+        <hint language="pt">arrives</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+    </displayer>
+  </kpi>
+  <kpi code="kpi_22691433185839397">
+    <description language="en">Available Hotels</description>
+    <provider code="dataprovider_27291433185414788" />
+    <displayer type="table" renderer="default">
+      <rowsperpage>10</rowsperpage>
+      <headerposition>top</headerposition>
+      <htmlstyle>border: 1px solid #000000; padding:0; text-align:center;</htmlstyle>
+      <htmlclass>skn-table_border</htmlclass>
+      <rowevenclass>skn-even_row</rowevenclass>
+      <rowoddclass>skn-odd_row</rowoddclass>
+      <rowhoverclass>skn-even_row_alt</rowhoverclass>
+      <column>
+        <modelproperty>hotel_id</modelproperty>
+        <viewindex>0</viewindex>
+        <name language="fr">hotel_id</name>
+        <name language="zh">hotel_id</name>
+        <name language="ja">hotel_id</name>
+        <name language="en">hotel_id</name>
+        <name language="es">hotel_id</name>
+        <name language="de">hotel_id</name>
+        <name language="pt">hotel_id</name>
+        <hint language="fr">hotel_id</hint>
+        <hint language="zh">hotel_id</hint>
+        <hint language="ja">hotel_id</hint>
+        <hint language="en">hotel_id</hint>
+        <hint language="es">hotel_id</hint>
+        <hint language="de">hotel_id</hint>
+        <hint language="pt">hotel_id</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>hotel_name</modelproperty>
+        <viewindex>1</viewindex>
+        <name language="fr">hotel_name</name>
+        <name language="zh">hotel_name</name>
+        <name language="ja">hotel_name</name>
+        <name language="en">hotel_name</name>
+        <name language="es">hotel_name</name>
+        <name language="de">hotel_name</name>
+        <name language="pt">hotel_name</name>
+        <hint language="fr">hotel_name</hint>
+        <hint language="zh">hotel_name</hint>
+        <hint language="ja">hotel_name</hint>
+        <hint language="en">hotel_name</hint>
+        <hint language="es">hotel_name</hint>
+        <hint language="de">hotel_name</hint>
+        <hint language="pt">hotel_name</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>rate</modelproperty>
+        <viewindex>2</viewindex>
+        <name language="fr">rate</name>
+        <name language="zh">rate</name>
+        <name language="ja">rate</name>
+        <name language="en">rate</name>
+        <name language="es">rate</name>
+        <name language="de">rate</name>
+        <name language="pt">rate</name>
+        <hint language="fr">rate</hint>
+        <hint language="zh">rate</hint>
+        <hint language="ja">rate</hint>
+        <hint language="en">rate</hint>
+        <hint language="es">rate</hint>
+        <hint language="de">rate</hint>
+        <hint language="pt">rate</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>city</modelproperty>
+        <viewindex>3</viewindex>
+        <name language="fr">city</name>
+        <name language="zh">city</name>
+        <name language="ja">city</name>
+        <name language="en">city</name>
+        <name language="es">city</name>
+        <name language="de">city</name>
+        <name language="pt">city</name>
+        <hint language="fr">city</hint>
+        <hint language="zh">city</hint>
+        <hint language="ja">city</hint>
+        <hint language="en">city</hint>
+        <hint language="es">city</hint>
+        <hint language="de">city</hint>
+        <hint language="pt">city</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+    </displayer>
+  </kpi>
+  <kpi code="kpi_22491433185615214">
+    <description language="en">Flight Bookings</description>
+    <provider code="dataprovider_27401433185450979" />
+    <displayer type="table" renderer="default">
+      <rowsperpage>10</rowsperpage>
+      <headerposition>top</headerposition>
+      <htmlstyle>border: 1px solid #000000; padding:0; text-align:center;</htmlstyle>
+      <htmlclass>skn-table_border</htmlclass>
+      <rowevenclass>skn-even_row</rowevenclass>
+      <rowoddclass>skn-odd_row</rowoddclass>
+      <rowhoverclass>skn-even_row_alt</rowhoverclass>
+      <column>
+        <modelproperty>booking_id</modelproperty>
+        <viewindex>0</viewindex>
+        <name language="fr">booking_id</name>
+        <name language="zh">booking_id</name>
+        <name language="ja">booking_id</name>
+        <name language="en">booking_ref_num</name>
+        <name language="es">booking_id</name>
+        <name language="de">booking_id</name>
+        <name language="pt">booking_id</name>
+        <hint language="fr">booking_id</hint>
+        <hint language="zh">booking_id</hint>
+        <hint language="ja">booking_id</hint>
+        <hint language="en">booking_ref_num</hint>
+        <hint language="es">booking_id</hint>
+        <hint language="de">booking_id</hint>
+        <hint language="pt">booking_id</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>airline</modelproperty>
+        <viewindex>1</viewindex>
+        <name language="en">airline</name>
+        <hint language="en">airline</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>flight_no</modelproperty>
+        <viewindex>2</viewindex>
+        <name language="fr">flight_no</name>
+        <name language="zh">flight_no</name>
+        <name language="ja">flight_no</name>
+        <name language="en">flight_no</name>
+        <name language="es">flight_no</name>
+        <name language="de">flight_no</name>
+        <name language="pt">flight_no</name>
+        <hint language="fr">flight_no</hint>
+        <hint language="zh">flight_no</hint>
+        <hint language="ja">flight_no</hint>
+        <hint language="en">flight_no</hint>
+        <hint language="es">flight_no</hint>
+        <hint language="de">flight_no</hint>
+        <hint language="pt">flight_no</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>origin</modelproperty>
+        <viewindex>3</viewindex>
+        <name language="en">origin</name>
+        <hint language="en">origin</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>destination</modelproperty>
+        <viewindex>4</viewindex>
+        <name language="en">destination</name>
+        <hint language="en">destination</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>price</modelproperty>
+        <viewindex>5</viewindex>
+        <name language="en">price</name>
+        <hint language="en">price</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>departs</modelproperty>
+        <viewindex>6</viewindex>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>arrives</modelproperty>
+        <viewindex>7</viewindex>
+        <name language="fr">arrives</name>
+        <name language="zh">arrives</name>
+        <name language="ja">arrives</name>
+        <name language="en">arrives</name>
+        <name language="es">arrives</name>
+        <name language="de">arrives</name>
+        <name language="pt">arrives</name>
+        <hint language="fr">arrives</hint>
+        <hint language="zh">arrives</hint>
+        <hint language="ja">arrives</hint>
+        <hint language="en">arrives</hint>
+        <hint language="es">arrives</hint>
+        <hint language="de">arrives</hint>
+        <hint language="pt">arrives</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+    </displayer>
+  </kpi>
+  <kpi code="kpi_22801433185877655">
+    <description language="en">Hotel Bookings</description>
+    <provider code="dataprovider_43111433185509354" />
+    <displayer type="table" renderer="default">
+      <rowsperpage>10</rowsperpage>
+      <headerposition>top</headerposition>
+      <htmlstyle>border: 1px solid #000000; padding:0; text-align:center;</htmlstyle>
+      <htmlclass>skn-table_border</htmlclass>
+      <rowevenclass>skn-even_row</rowevenclass>
+      <rowoddclass>skn-odd_row</rowoddclass>
+      <rowhoverclass>skn-even_row_alt</rowhoverclass>
+      <column>
+        <modelproperty>booking_id</modelproperty>
+        <viewindex>0</viewindex>
+        <name language="fr">booking_id</name>
+        <name language="zh">booking_id</name>
+        <name language="ja">booking_id</name>
+        <name language="en">booking_ref_num</name>
+        <name language="es">booking_id</name>
+        <name language="de">booking_id</name>
+        <name language="pt">booking_id</name>
+        <hint language="fr">booking_id</hint>
+        <hint language="zh">booking_id</hint>
+        <hint language="ja">booking_id</hint>
+        <hint language="en">booking_ref_num</hint>
+        <hint language="es">booking_id</hint>
+        <hint language="de">booking_id</hint>
+        <hint language="pt">booking_id</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>hotel_id</modelproperty>
+        <viewindex>1</viewindex>
+        <name language="fr">hotel_id</name>
+        <name language="zh">hotel_id</name>
+        <name language="ja">hotel_id</name>
+        <name language="en">hotel_id</name>
+        <name language="es">hotel_id</name>
+        <name language="de">hotel_id</name>
+        <name language="pt">hotel_id</name>
+        <hint language="fr">hotel_id</hint>
+        <hint language="zh">hotel_id</hint>
+        <hint language="ja">hotel_id</hint>
+        <hint language="en">hotel_id</hint>
+        <hint language="es">hotel_id</hint>
+        <hint language="de">hotel_id</hint>
+        <hint language="pt">hotel_id</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>hotel_name</modelproperty>
+        <viewindex>2</viewindex>
+        <name language="en">hotel_name</name>
+        <hint language="en">hotel_name</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>city</modelproperty>
+        <viewindex>3</viewindex>
+        <name language="en">city</name>
+        <hint language="en">city</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>rate</modelproperty>
+        <viewindex>4</viewindex>
+        <name language="en">rate</name>
+        <hint language="en">rate</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>arrive</modelproperty>
+        <viewindex>5</viewindex>
+        <name language="fr">arrive</name>
+        <name language="zh">arrive</name>
+        <name language="ja">arrive</name>
+        <name language="en">arrive</name>
+        <name language="es">arrive</name>
+        <name language="de">arrive</name>
+        <name language="pt">arrive</name>
+        <hint language="fr">arrive</hint>
+        <hint language="zh">arrive</hint>
+        <hint language="ja">arrive</hint>
+        <hint language="en">arrive</hint>
+        <hint language="es">arrive</hint>
+        <hint language="de">arrive</hint>
+        <hint language="pt">arrive</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+      <column>
+        <modelproperty>depart</modelproperty>
+        <viewindex>6</viewindex>
+        <name language="fr">depart</name>
+        <name language="zh">depart</name>
+        <name language="ja">depart</name>
+        <name language="en">depart</name>
+        <name language="es">depart</name>
+        <name language="de">depart</name>
+        <name language="pt">depart</name>
+        <hint language="fr">depart</hint>
+        <hint language="zh">depart</hint>
+        <hint language="ja">depart</hint>
+        <hint language="en">depart</hint>
+        <hint language="es">depart</hint>
+        <hint language="de">depart</hint>
+        <hint language="pt">depart</hint>
+        <headerhtmlstyle>text-align:center; width:100px; overflow:hidden; background-color:#C6D8EB; height:20px; color:#465F7D; font-weight:Bold;  white-space:nowrap;</headerhtmlstyle>
+        <cellhtmlstyle>width:100px; height:20px;  white-space:nowrap;</cellhtmlstyle>
+        <htmlvalue>{value}</htmlvalue>
+        <selectable>false</selectable>
+        <sortable>true</sortable>
+      </column>
+    </displayer>
+  </kpi>
+</kpis>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagram="http://www.metamatrix.com/metamodels/Diagram" xmlns:mmcore="http://www.metamatrix.com/metamodels/Core" xmlns:mmws="http://www.metamatrix.com/metamodels/WebService" xmlns:transformation="http://www.metamatrix.com/metamodels/Transformation">
+  <mmcore:ModelAnnotation xmi:uuid="mmuuid:05d725db-5b18-4c48-b8ef-31de5d81474b" description="Auto-generated from the following WSDL definitions:&#xa;  http://soap.service.acme/HotelWS/ - http://soap.service.acme/HotelWS/" primaryMetamodelUri="http://www.metamatrix.com/metamodels/WebService" modelType="VIRTUAL" ProducerName="Teiid Designer" ProducerVersion="9.0.1.Final-v20150211-1407-B643">
+    <modelImports xmi:uuid="mmuuid:696fa758-9abd-45ff-94f9-843716ee8ac9" name="hotels_svc_responses" modelLocation="hotels_svc_responses.xmi" uuid="mmuuid:f5c06dda-b790-4cfb-966f-6ce6e4f40da0" modelType="VIRTUAL" primaryMetamodelUri="http://www.metamatrix.com/metamodels/XmlDocument"/>
+    <modelImports xmi:uuid="mmuuid:23e300eb-53fe-4824-a78f-9b8840778745" name="HotelWS_schema1" modelLocation="web_services/HotelWS_schema1.xsd" modelType="TYPE" primaryMetamodelUri="http://www.eclipse.org/xsd/2002/XSD"/>
+  </mmcore:ModelAnnotation>
+  <mmws:Interface xmi:uuid="mmuuid:4fbfe118-98b2-40ad-9deb-b9dee6f22005" name="HotelWS">
+    <operations xmi:uuid="mmuuid:761addbf-2226-4d20-91b7-d6a730de2c1f" name="getAvailableHotel">
+      <input xmi:uuid="mmuuid:883dfe03-c52d-45ac-959b-1b2ebd330282" name="getAvailableHotel">
+        <contentElement href="web_services/HotelWS_schema1.xsd#//getAvailableHotel;XSDElementDeclaration"/>
+      </input>
+      <output xmi:uuid="mmuuid:d3c03eaa-24c4-4333-bd84-9ac6f7575912" name="getAvailableHotelResponse">
+        <contentElement href="web_services/HotelWS_schema1.xsd#//getAvailableHotelResponse;XSDElementDeclaration=1"/>
+        <samples xmi:uuid="mmuuid:44cc8f18-2744-4793-b1f9-70da128caabb"/>
+        <xmlDocument href="hotels_svc_responses.xmi#mmuuid/dc04f33a-bdd0-4d1e-874c-8255780a2f2f"/>
+      </output>
+    </operations>
+    <operations xmi:uuid="mmuuid:1a0acf93-5a42-4b36-be2b-68f4385db70f" name="bookHotel">
+      <input xmi:uuid="mmuuid:7e823728-66e8-4f5f-9e42-4bec7a791f88" name="bookHotelRequest">
+        <contentElement href="web_services/HotelWS_schema1.xsd#//bookHotel;XSDElementDeclaration=2"/>
+      </input>
+      <output xmi:uuid="mmuuid:f2bf2058-4403-4fd5-808e-1a6f92cf091d" name="bookHotelResponse">
+        <contentElement href="web_services/HotelWS_schema1.xsd#//bookHotelResponse;XSDElementDeclaration=3"/>
+        <samples xmi:uuid="mmuuid:c34d6961-57b0-4bf9-9c56-0bd952b9f1f4"/>
+        <xmlDocument href="hotels_svc_responses.xmi#mmuuid/da4e3fff-8fb4-4d17-a64f-52e3178dcc48"/>
+      </output>
+    </operations>
+    <operations xmi:uuid="mmuuid:2e1646f4-4c1f-40b1-ab24-003c08c28358" name="cancelBooking">
+      <input xmi:uuid="mmuuid:a06d1ca4-84bc-4df1-8f4d-acf9876a948c" name="cancelBookingRequest">
+        <contentElement href="web_services/HotelWS_schema1.xsd#//cancelBooking;XSDElementDeclaration=4"/>
+      </input>
+      <output xmi:uuid="mmuuid:d9b41cef-908f-478d-a03f-23bc57817d08" name="cancelBookingResponse">
+        <contentElement href="web_services/HotelWS_schema1.xsd#//cancelBookingResponse;XSDElementDeclaration=5"/>
+        <samples xmi:uuid="mmuuid:a72dc5a2-6f00-4dfc-be63-c4a0d1123f16"/>
+        <xmlDocument href="hotels_svc_responses.xmi#mmuuid/52ebdf2d-47cc-4d39-8737-40b1e69efaf6"/>
+      </output>
+    </operations>
+  </mmws:Interface>
+  <transformation:TransformationContainer xmi:uuid="mmuuid:2eb2035b-be96-4642-a09b-f06c774a74a7">
+    <transformationMappings xsi:type="transformation:SqlTransformationMappingRoot" xmi:uuid="mmuuid:c9c82234-4ad3-4a85-98f5-4d46ea21d6d5" outputs="mmuuid/761addbf-2226-4d20-91b7-d6a730de2c1f" target="mmuuid/761addbf-2226-4d20-91b7-d6a730de2c1f">
+      <helper xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:8d02e732-7dd3-43b8-adb5-df40c14cb982">
+        <nested xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:4d12ac8f-439e-4916-80b5-f8eb8e25662b" selectSql="BEGIN&#xa;&#x9;DECLARE string VARIABLES.IN_endDate;&#xa;&#x9;VARIABLES.IN_endDate = xpathValue(hotels_svc.HotelWS.getAvailableHotel.getAvailableHotel, '/*:getAvailableHotel/*:in/*:endDate');&#xa;&#x9;DECLARE string VARIABLES.IN_startDate;&#xa;&#x9;VARIABLES.IN_startDate = xpathValue(hotels_svc.HotelWS.getAvailableHotel.getAvailableHotel, '/*:getAvailableHotel/*:in/*:startDate');&#xa;&#x9;DECLARE string VARIABLES.IN_targetCity;&#xa;&#x9;VARIABLES.IN_targetCity = xpathValue(hotels_svc.HotelWS.getAvailableHotel.getAvailableHotel, '/*:getAvailableHotel/*:in/*:targetCity');&#xa;&#x9;SELECT * FROM hotels_svc_responses.HotelWS_getAvailableHotel_getAvailableHotelResponse WHERE (hotels_svc_responses.HotelWS_getAvailableHotel_getAvailableHotelResponse.getAvailableHotelResponse.&quot;return&quot;.availableTo = VARIABLES.IN_endDate) AND (hotels_svc_responses.HotelWS_getAvailableHotel_getAvailableHotelResponse.getAvailableHotelResponse.&quot;return&quot;.availableFrom = VARIABLES.IN_startDate) AND (hotels_svc_responses.HotelWS_getAvailableHotel_getAvailableHotelResponse.getAvailableHotelResponse.&quot;return&quot;.hotelCity = VARIABLES.IN_targetCity);&#xa;END"/>
+        <aliases xmi:uuid="mmuuid:852747e8-0086-40df-8bf2-6f9ebd37451c" alias="HotelWS_getAvailableHotel_getAvailableHotelResponse">
+          <aliasedObject href="hotels_svc_responses.xmi#mmuuid/dc04f33a-bdd0-4d1e-874c-8255780a2f2f"/>
+        </aliases>
+      </helper>
+      <nested xsi:type="transformation:TransformationMapping" xmi:uuid="mmuuid:c53a6ce1-143e-488a-8bf6-7a47a37053c2" outputs="mmuuid/44cc8f18-2744-4793-b1f9-70da128caabb"/>
+      <inputs href="hotels_svc_responses.xmi#mmuuid/dc04f33a-bdd0-4d1e-874c-8255780a2f2f"/>
+    </transformationMappings>
+    <transformationMappings xsi:type="transformation:SqlTransformationMappingRoot" xmi:uuid="mmuuid:23c4099e-5cd4-4dc8-9cd7-836a69837d9c" outputs="mmuuid/1a0acf93-5a42-4b36-be2b-68f4385db70f" target="mmuuid/1a0acf93-5a42-4b36-be2b-68f4385db70f">
+      <helper xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:fc49b253-e7b6-4aaa-8eb9-7e6d6702a474">
+        <nested xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:39bc19f1-0788-40ea-b330-6955f9a252f4" selectSql="BEGIN&#xa;&#x9;DECLARE string VARIABLES.IN_in;&#xa;&#x9;VARIABLES.IN_in = xpathValue(hotels_svc.HotelWS.bookHotel.bookHotelRequest, '/*:bookHotel/*:in');&#xa;&#x9;SELECT * FROM hotels_svc_responses.HotelWS_bookHotel_bookHotelResponse WHERE hotels_svc_responses.HotelWS_bookHotel_bookHotelResponse.bookHotelResponse.&quot;out&quot; = VARIABLES.IN_in;&#xa;END"/>
+        <aliases xmi:uuid="mmuuid:e5f9dc3d-0899-44a6-88d8-97ceb3718c22" alias="HotelWS_bookHotel_bookHotelResponse">
+          <aliasedObject href="hotels_svc_responses.xmi#mmuuid/da4e3fff-8fb4-4d17-a64f-52e3178dcc48"/>
+        </aliases>
+      </helper>
+      <nested xsi:type="transformation:TransformationMapping" xmi:uuid="mmuuid:ed0c840d-c864-4301-9dec-ad1246b5a2b0" outputs="mmuuid/c34d6961-57b0-4bf9-9c56-0bd952b9f1f4"/>
+      <inputs href="hotels_svc_responses.xmi#mmuuid/da4e3fff-8fb4-4d17-a64f-52e3178dcc48"/>
+    </transformationMappings>
+    <transformationMappings xsi:type="transformation:SqlTransformationMappingRoot" xmi:uuid="mmuuid:3f108e3e-8526-437e-9a8c-780859f09694" outputs="mmuuid/2e1646f4-4c1f-40b1-ab24-003c08c28358" target="mmuuid/2e1646f4-4c1f-40b1-ab24-003c08c28358">
+      <helper xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:18cd25d6-2750-47ff-bd3d-f19ab7d4963d">
+        <nested xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:0130a106-fe53-4bcc-bd1f-2b0ae1117a4b" selectSql="BEGIN&#xa;&#x9;DECLARE string VARIABLES.IN_in;&#xa;&#x9;VARIABLES.IN_in = xpathValue(hotels_svc.HotelWS.cancelBooking.cancelBookingRequest, '/*:cancelBooking/*:in');&#xa;&#x9;SELECT * FROM hotels_svc_responses.HotelWS_cancelBooking_cancelBookingResponse WHERE hotels_svc_responses.HotelWS_cancelBooking_cancelBookingResponse.cancelBookingResponse.&quot;out&quot; = VARIABLES.IN_in;&#xa;END"/>
+        <aliases xmi:uuid="mmuuid:a3a8a7ea-e2d5-48d7-994f-1e1ed21e20b3" alias="HotelWS_cancelBooking_cancelBookingResponse">
+          <aliasedObject href="hotels_svc_responses.xmi#mmuuid/52ebdf2d-47cc-4d39-8737-40b1e69efaf6"/>
+        </aliases>
+      </helper>
+      <nested xsi:type="transformation:TransformationMapping" xmi:uuid="mmuuid:2a36fc99-2a33-4edd-8d20-e53431cb25a2" outputs="mmuuid/a72dc5a2-6f00-4dfc-be63-c4a0d1123f16"/>
+      <inputs href="hotels_svc_responses.xmi#mmuuid/52ebdf2d-47cc-4d39-8737-40b1e69efaf6"/>
+    </transformationMappings>
+  </transformation:TransformationContainer>
+  <diagram:DiagramContainer xmi:uuid="mmuuid:0544cef6-2a49-420e-9424-afa4dbc28874">
+    <diagram xmi:uuid="mmuuid:1ee210dd-d141-49d7-b12e-094e24ed39f6" type="packageDiagramType" target="mmuuid/4fbfe118-98b2-40ad-9deb-b9dee6f22005">
+      <diagramEntity xmi:uuid="mmuuid:76b99f94-a26f-4993-b4f6-4f21f794c5de" modelObject="mmuuid/761addbf-2226-4d20-91b7-d6a730de2c1f" xPosition="536" yPosition="10"/>
+      <diagramEntity xmi:uuid="mmuuid:e115c572-f597-4997-b9c9-ec8488077409" modelObject="mmuuid/1a0acf93-5a42-4b36-be2b-68f4385db70f" xPosition="10" yPosition="10"/>
+      <diagramEntity xmi:uuid="mmuuid:280e72d5-c250-4d44-b6e3-0b7453f82479" modelObject="mmuuid/2e1646f4-4c1f-40b1-ab24-003c08c28358" xPosition="273" yPosition="10"/>
+    </diagram>
+  </diagram:DiagramContainer>
+</xmi:XMI>

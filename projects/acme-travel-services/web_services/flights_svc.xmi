@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagram="http://www.metamatrix.com/metamodels/Diagram" xmlns:mmcore="http://www.metamatrix.com/metamodels/Core" xmlns:mmws="http://www.metamatrix.com/metamodels/WebService" xmlns:transformation="http://www.metamatrix.com/metamodels/Transformation">
+  <mmcore:ModelAnnotation xmi:uuid="mmuuid:a2a259c0-fb9e-4f8f-9aaf-a2fb5b956a43" description="Auto-generated from the following WSDL definitions:&#xa;  http://service.soap.jboss.com/AcmeDemo/ - http://service.soap.jboss.com/AcmeDemo/" primaryMetamodelUri="http://www.metamatrix.com/metamodels/WebService" modelType="VIRTUAL" ProducerName="Teiid Designer" ProducerVersion="9.0.1.Final-v20150211-1407-B643">
+    <modelImports xmi:uuid="mmuuid:223c96e9-9d72-4fbb-9a8d-a42353355473" name="flights_svc_responses" modelLocation="flights_svc_responses.xmi" uuid="mmuuid:11dedb9a-18ee-4ab5-95ce-1bead991e5d0" modelType="VIRTUAL" primaryMetamodelUri="http://www.metamatrix.com/metamodels/XmlDocument"/>
+    <modelImports xmi:uuid="mmuuid:fa730d94-d79f-4463-b64d-3bae794ac6c1" name="AcmeDemoService_schema1" modelLocation="web_services/AcmeDemoService_schema1.xsd" modelType="TYPE" primaryMetamodelUri="http://www.eclipse.org/xsd/2002/XSD"/>
+  </mmcore:ModelAnnotation>
+  <mmws:Interface xmi:uuid="mmuuid:416fb11c-3325-47a3-82ce-d6966ccd7ea5" name="AcmeDemoInterface">
+    <operations xmi:uuid="mmuuid:d910667a-fb26-4233-8295-c242fdea2dd9" name="listAvailablePlanes">
+      <input xmi:uuid="mmuuid:17fec66a-4486-4cbf-87d8-a4f2289c70db" name="listAvailablePlanes">
+        <contentElement href="web_services/AcmeDemoService_schema1.xsd#//listAvailablePlanes;XSDElementDeclaration=4"/>
+      </input>
+      <output xmi:uuid="mmuuid:cd9cb4ea-b42b-454f-8d00-2b0c7fb06ad0" name="listAvailablePlanesResponse">
+        <contentElement href="web_services/AcmeDemoService_schema1.xsd#//listAvailablePlanesResponse;XSDElementDeclaration=5"/>
+        <samples xmi:uuid="mmuuid:34d8cf8d-538d-45db-835a-06e52be808e8"/>
+        <xmlDocument href="flights_svc_responses.xmi#mmuuid/30106c68-9ec9-4462-a97b-43e2c908a789"/>
+      </output>
+    </operations>
+    <operations xmi:uuid="mmuuid:de3f8109-67f5-45ae-81cd-66c175111fd9" name="cancelBooking">
+      <input xmi:uuid="mmuuid:03cbee38-5cb1-42ab-8122-d26485f0ae91" name="cancelBooking">
+        <contentElement href="web_services/AcmeDemoService_schema1.xsd#//cancelBooking;XSDElementDeclaration=2"/>
+      </input>
+      <output xmi:uuid="mmuuid:9f0e8723-0041-445a-8abb-baab0e08ccd2" name="cancelBookingResponse">
+        <contentElement href="web_services/AcmeDemoService_schema1.xsd#//cancelBookingResponse;XSDElementDeclaration=3"/>
+        <samples xmi:uuid="mmuuid:335603f4-3e10-465d-ab19-5caa6eff0e1d"/>
+        <xmlDocument href="flights_svc_responses.xmi#mmuuid/2acb86cc-453c-4f22-aa5b-3ca6d5c4f677"/>
+      </output>
+    </operations>
+    <operations xmi:uuid="mmuuid:622a0b69-a459-47aa-8b0d-a3d7eaa3d514" name="bookFlights">
+      <input xmi:uuid="mmuuid:5d665a70-df29-4c5c-84c3-3ca93ed51551" name="bookFlights">
+        <contentElement href="web_services/AcmeDemoService_schema1.xsd#//bookFlights;XSDElementDeclaration"/>
+      </input>
+      <output xmi:uuid="mmuuid:36a9a805-b988-46c3-9cc1-919927c87fa8" name="bookFlightsResponse">
+        <contentElement href="web_services/AcmeDemoService_schema1.xsd#//bookFlightsResponse;XSDElementDeclaration=1"/>
+        <samples xmi:uuid="mmuuid:b5bed8b0-223a-4a8a-8596-033969ed6556"/>
+        <xmlDocument href="flights_svc_responses.xmi#mmuuid/8b1ec757-54ea-4e2d-b0e3-d3b001e0c008"/>
+      </output>
+    </operations>
+  </mmws:Interface>
+  <transformation:TransformationContainer xmi:uuid="mmuuid:d4ad2190-bac9-4337-9751-a5966d1a30e4">
+    <transformationMappings xsi:type="transformation:SqlTransformationMappingRoot" xmi:uuid="mmuuid:f8b260fd-fe0a-4527-9da7-72c018c31611" outputs="mmuuid/d910667a-fb26-4233-8295-c242fdea2dd9" target="mmuuid/d910667a-fb26-4233-8295-c242fdea2dd9">
+      <helper xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:9b3fe7e3-bb78-4a45-aa7f-6ff207b9aec5">
+        <nested xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:c3d9c218-ce50-43e4-b4bc-b395e749adb3" selectSql="BEGIN&#xa;&#x9;DECLARE string VARIABLES.IN_endDate;&#xa;&#x9;VARIABLES.IN_endDate = xpathValue(flights_svc.AcmeDemoInterface.listAvailablePlanes.listAvailablePlanes, '/*:listAvailablePlanes/*:in/*:endDate');&#xa;&#x9;DECLARE string VARIABLES.IN_startDate;&#xa;&#x9;VARIABLES.IN_startDate = xpathValue(flights_svc.AcmeDemoInterface.listAvailablePlanes.listAvailablePlanes, '/*:listAvailablePlanes/*:in/*:startDate');&#xa;&#x9;DECLARE string VARIABLES.IN_endCity;&#xa;&#x9;VARIABLES.IN_endCity = xpathValue(flights_svc.AcmeDemoInterface.listAvailablePlanes.listAvailablePlanes, '/*:listAvailablePlanes/*:in/*:endCity');&#xa;&#x9;DECLARE string VARIABLES.IN_startCity;&#xa;&#x9;VARIABLES.IN_startCity = xpathValue(flights_svc.AcmeDemoInterface.listAvailablePlanes.listAvailablePlanes, '/*:listAvailablePlanes/*:in/*:startCity');&#xa;&#x9;SELECT * FROM flights_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse WHERE (flights_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse.listAvailablePlanesResponse.&quot;return&quot;.travelDate = VARIABLES.IN_endDate) AND (flights_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse.listAvailablePlanesResponse.&quot;return&quot;.travelDate = VARIABLES.IN_startDate) AND (flights_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse.listAvailablePlanesResponse.&quot;return&quot;.targetCity = VARIABLES.IN_endCity) AND (flights_svc_responses.AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse.listAvailablePlanesResponse.&quot;return&quot;.startCity = VARIABLES.IN_startCity);&#xa;END"/>
+        <aliases xmi:uuid="mmuuid:033d7369-1d26-405e-b442-dc44d26d2559" alias="AcmeDemoInterface_listAvailablePlanes_listAvailablePlanesResponse">
+          <aliasedObject href="flights_svc_responses.xmi#mmuuid/30106c68-9ec9-4462-a97b-43e2c908a789"/>
+        </aliases>
+      </helper>
+      <nested xsi:type="transformation:TransformationMapping" xmi:uuid="mmuuid:342f4ad2-4dcd-48e6-bf5d-32b39e0cd5f0" outputs="mmuuid/34d8cf8d-538d-45db-835a-06e52be808e8"/>
+      <inputs href="flights_svc_responses.xmi#mmuuid/30106c68-9ec9-4462-a97b-43e2c908a789"/>
+    </transformationMappings>
+    <transformationMappings xsi:type="transformation:SqlTransformationMappingRoot" xmi:uuid="mmuuid:df2bbe4f-1c7e-4150-84fd-f4d44872c096" outputs="mmuuid/de3f8109-67f5-45ae-81cd-66c175111fd9" target="mmuuid/de3f8109-67f5-45ae-81cd-66c175111fd9">
+      <helper xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:7b6e3b13-b295-45ad-bac6-667db8d8ea62">
+        <nested xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:e22ac50f-b7f6-4946-a740-27a8c062ca6c" selectSql="BEGIN&#xa;&#x9;DECLARE string VARIABLES.IN_in;&#xa;&#x9;VARIABLES.IN_in = xpathValue(flights_svc.AcmeDemoInterface.cancelBooking.cancelBooking, '/*:cancelBooking/*:in');&#xa;&#x9;SELECT * FROM flights_svc_responses.AcmeDemoInterface_cancelBooking_cancelBookingResponse WHERE flights_svc_responses.AcmeDemoInterface_cancelBooking_cancelBookingResponse.cancelBookingResponse.&quot;out&quot; = VARIABLES.IN_in;&#xa;END"/>
+        <aliases xmi:uuid="mmuuid:bbf0be9d-0345-4f59-93d4-c928c83ac679" alias="AcmeDemoInterface_cancelBooking_cancelBookingResponse">
+          <aliasedObject href="flights_svc_responses.xmi#mmuuid/2acb86cc-453c-4f22-aa5b-3ca6d5c4f677"/>
+        </aliases>
+      </helper>
+      <nested xsi:type="transformation:TransformationMapping" xmi:uuid="mmuuid:417e94cc-c918-4659-aa39-f99ceda0c94d" outputs="mmuuid/335603f4-3e10-465d-ab19-5caa6eff0e1d"/>
+      <inputs href="flights_svc_responses.xmi#mmuuid/2acb86cc-453c-4f22-aa5b-3ca6d5c4f677"/>
+    </transformationMappings>
+    <transformationMappings xsi:type="transformation:SqlTransformationMappingRoot" xmi:uuid="mmuuid:f43a9c16-3c9e-4e27-95a0-25e437ad6c31" outputs="mmuuid/622a0b69-a459-47aa-8b0d-a3d7eaa3d514" target="mmuuid/622a0b69-a459-47aa-8b0d-a3d7eaa3d514">
+      <helper xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:deb342aa-9094-4375-8694-07679bad17f2">
+        <nested xsi:type="transformation:SqlTransformation" xmi:uuid="mmuuid:dba6c0fb-0fd2-46ba-a521-967450a93458" selectSql="BEGIN&#xa;&#x9;DECLARE string VARIABLES.IN_in;&#xa;&#x9;VARIABLES.IN_in = xpathValue(flights_svc.AcmeDemoInterface.bookFlights.bookFlights, '/*:bookFlights/*:in');&#xa;&#x9;SELECT * FROM flights_svc_responses.AcmeDemoInterface_bookFlights_bookFlightsResponse WHERE flights_svc_responses.AcmeDemoInterface_bookFlights_bookFlightsResponse.bookFlightsResponse.&quot;out&quot; = VARIABLES.IN_in;&#xa;END"/>
+        <aliases xmi:uuid="mmuuid:e7c81f91-2b38-4eaf-901b-8408c0ba1cbe" alias="AcmeDemoInterface_bookFlights_bookFlightsResponse">
+          <aliasedObject href="flights_svc_responses.xmi#mmuuid/8b1ec757-54ea-4e2d-b0e3-d3b001e0c008"/>
+        </aliases>
+      </helper>
+      <nested xsi:type="transformation:TransformationMapping" xmi:uuid="mmuuid:6f17c5f8-58af-4e6c-9a62-f689a65af497" outputs="mmuuid/b5bed8b0-223a-4a8a-8596-033969ed6556"/>
+      <inputs href="flights_svc_responses.xmi#mmuuid/8b1ec757-54ea-4e2d-b0e3-d3b001e0c008"/>
+    </transformationMappings>
+  </transformation:TransformationContainer>
+  <diagram:DiagramContainer xmi:uuid="mmuuid:909de721-195b-4a92-8b88-e025fd89ef50">
+    <diagram xmi:uuid="mmuuid:61fde530-e9d4-4b5b-bd2e-18e91fd395eb" type="packageDiagramType" target="mmuuid/416fb11c-3325-47a3-82ce-d6966ccd7ea5">
+      <diagramEntity xmi:uuid="mmuuid:644d880a-89f0-4a12-b0d5-24d1419cc1d4" modelObject="mmuuid/d910667a-fb26-4233-8295-c242fdea2dd9" xPosition="10" yPosition="10"/>
+      <diagramEntity xmi:uuid="mmuuid:83c72b8e-dc88-4621-8867-2959b71f6fb2" modelObject="mmuuid/de3f8109-67f5-45ae-81cd-66c175111fd9" xPosition="10" yPosition="194"/>
+      <diagramEntity xmi:uuid="mmuuid:e37878d1-6be7-49bc-bbf2-521bfeafcfbd" modelObject="mmuuid/622a0b69-a459-47aa-8b0d-a3d7eaa3d514" xPosition="279" yPosition="10"/>
+    </diagram>
+  </diagram:DiagramContainer>
+</xmi:XMI>

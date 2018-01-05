@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="HotelWS" targetNamespace="http://soap.service.acme/HotelWS/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.service.acme/HotelWS/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://soap.service.acme/HotelWS/"
+				schemaLocation="HotelWS_schema1.xsd" />
+		</schema>
+	</wsdl:types>
+	<wsdl:message name="getAvailableHotel">
+		<wsdl:part name="parameters" element="tns:getAvailableHotel" />
+	</wsdl:message>
+	<wsdl:message name="getAvailableHotelResponse">
+		<wsdl:part name="parameters" element="tns:getAvailableHotelResponse" />
+
+	</wsdl:message>
+	<wsdl:message name="bookHotelRequest">
+		<wsdl:part name="parameters" element="tns:bookHotel" />
+	</wsdl:message>
+	<wsdl:message name="bookHotelResponse">
+		<wsdl:part name="parameters" element="tns:bookHotelResponse" />
+	</wsdl:message>
+	<wsdl:message name="cancelBookingRequest">
+		<wsdl:part name="parameters" element="tns:cancelBooking" />
+	</wsdl:message>
+	<wsdl:message name="cancelBookingResponse">
+		<wsdl:part name="parameters" element="tns:cancelBookingResponse" />
+	</wsdl:message>
+	<wsdl:portType name="HotelWS">
+		<wsdl:operation name="getAvailableHotel">
+			<wsdl:input name="getAvailableHotel" message="tns:getAvailableHotel" />
+			<wsdl:output name="getAvailableHotelResponse" message="tns:getAvailableHotelResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="bookHotel">
+			<wsdl:input name="bookHotelRequest" message="tns:bookHotelRequest" />
+			<wsdl:output name="bookHotelResponse" message="tns:bookHotelResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="cancelBooking">
+			<wsdl:input name="cancelBookingRequest" message="tns:cancelBookingRequest" />
+			<wsdl:output name="cancelBookingResponse" message="tns:cancelBookingResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="HotelWSSoapBinding" type="tns:HotelWS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getAvailableHotel">
+			<soap:operation soapAction="http://soap.service.acme/HotelWS/getAvailableHotel"
+				style="document" />
+			<wsdl:input name="getAvailableHotel">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getAvailableHotelResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="bookHotel">
+			<soap:operation soapAction="http://soap.service.acme/HotelWS/bookHotel"
+				style="document" />
+			<wsdl:input name="bookHotelRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="bookHotelResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancelBooking">
+			<soap:operation soapAction="http://soap.service.acme/HotelWS/cancelBooking"
+				style="document" />
+			<wsdl:input name="cancelBookingRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="cancelBookingResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="HotelWS">
+		<wsdl:port name="HotelWSImplPort" binding="tns:HotelWSSoapBinding">
+			<soap:address location="http://localhost:9090/HotelWSImplPort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

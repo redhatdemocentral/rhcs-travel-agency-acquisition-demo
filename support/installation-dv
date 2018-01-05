@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AutomatedInstallation langpack="eng">
+<productName>DV</productName>
+<productVersion>6.2.0</productVersion>
+<com.izforge.izpack.panels.HTMLLicencePanel id="HTMLLicencePanel"/>
+<com.izforge.izpack.panels.TargetPanel id="DirectoryPanel">
+<installpath>target/jboss-dv-6.2</installpath>
+</com.izforge.izpack.panels.TargetPanel>
+<com.izforge.izpack.panels.TreePacksPanel id="TreePacksPanel">
+<pack index="0" name="Integration Platform Console" selected="true"/>
+<pack index="1" name="Red Hat JBoss DV Platform" selected="true"/>
+<pack index="2" name="Teiid" selected="true"/>
+<pack index="3" name="ModeShape" selected="false"/>
+</com.izforge.izpack.panels.TreePacksPanel>
+<com.izforge.izpack.panels.UserInputPanel id="security">
+<userInput>
+<entry key="use.same.password" value="false"/>
+<entry key="addUser" value="false"/>
+<entry key="Dashboard.admin.username" value="dashboardAdmin"/>
+<entry autoPrompt="true" key="Dashboard.admin.password"/>
+<entry key="Teiid.user.username" value="teiidUser"/>
+<entry autoPrompt="true" key="Teiid.user.password"/>
+<entry key="Teiid.user.odata" value=""/>
+<entry key="Teiid.user.logging" value=""/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="postinstall">
+<userInput>
+<entry key="postinstallServer" value="false"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.izforge.izpack.panels.UserInputPanel id="vaultsecuritypreexisting"/>
+<com.izforge.izpack.panels.UserInputPanel id="vaultsecuritydefault">
+<userInput>
+<entry autoPrompt="true" key="vault.keystorepwd"/>
+</userInput>
+</com.izforge.izpack.panels.UserInputPanel>
+<com.redhat.installer.asconfiguration.securitydomain.panel.SecurityDomainPanel id="Security Domain Panel"/>
+<com.izforge.izpack.panels.UserInputPanel id="jsssecuritydomain"/>
+<com.redhat.installer.asconfiguration.jdbc.panel.JBossJDBCDriverSetupPanel id="jdbc.panel"/>
+<com.izforge.izpack.panels.UserInputPanel id="dblogging.panel"/>
+<com.izforge.izpack.panels.UserInputPanel id="javaopts.panel"/>
+<com.izforge.izpack.panels.SummaryPanel id="SummaryPanel"/>
+<com.izforge.izpack.panels.InstallPanel id="InstallPanel"/>
+<com.izforge.izpack.panels.ProcessPanel id="ProcessPanel"/>
+<com.izforge.izpack.panels.FinishPanel id="FinishPanel"/>
+</AutomatedInstallation>
