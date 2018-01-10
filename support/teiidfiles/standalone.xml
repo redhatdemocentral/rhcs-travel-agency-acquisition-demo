@@ -545,9 +545,9 @@
     </socket-binding-group>
 
     <deployments>
-        <deployment name="teiid-odata-8.7.1.6_2-redhat-6.war" runtime-name="teiid-odata-8.7.1.6_2-redhat-6.war">
-            <fs-exploded path="dataVirtualization/vdb/teiid-odata-8.7.1.6_2-redhat-6.war/" relative-to="jboss.home.dir"/>
-        </deployment>
+        <deployment name="teiid-odata.war" runtime-name="teiid-odata.war">
+            <fs-exploded path="dataVirtualization/vdb/teiid-odata.war/" relative-to="jboss.home.dir"/>
+        </deploymen>
         <deployment name="teiid-dashboard-builder.war" runtime-name="teiid-dashboard-builder.war">
             <fs-exploded path="dataVirtualization/teiid-dashboard/teiid-dashboard-builder.war/" relative-to="jboss.home.dir"/>
         </deployment>
