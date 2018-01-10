@@ -15,6 +15,7 @@ HOST_IP=yourhost.com
 OCP_DESCRIPTION="Travel Agency Acquisition"
 OCP_PRJ=appdev-in-cloud
 OCP_APP=travel-booking-acquisition
+OCP_APP_DV=travel-booking-dv
 
 # prints the documentation for this script.
 function print_docs()
@@ -154,8 +155,77 @@ echo "Creating a new project..."
 echo
 oc new-project "$OCP_PRJ" --display-name="$OCP_DESCRIPTION" --description="Travel agency booking application solution for data issues after acquisition of sister agency during bookings season."
 
+echo "Setup for DataVirt container..."
 echo
-echo "Setting up a new build..."
+cp support/Dockerfile-dv Dockerfile
+
+echo
+echo "Setting up a new $OCP_APP_DV build..."
+echo
+oc delete bc "$OCP_APP_DV" -n "$OCP_PRJ" >/dev/null 2>&1
+oc delete imagestreams "developer" >/dev/null 2>&1
+oc delete imagestreams "$OCP_APP_DV" >/dev/null 2>&1
+oc new-build "jbossdemocentral/developer" --name=$OCP_APP_DV --binary=true 
+			
+if [ "$?" -ne "0" ]; then
+	echo
+	echo "Error occurred during 'oc new-build' command!"
+	exit
+fi
+
+# need to wait a bit for new build to finish with developer image.
+sleep 10
+
+echo
+echo "Importing developer image..."
+echo
+oc import-image developer
+												
+if [ $? -ne 0 ]; then
+	echo
+	echo "Error occurred during 'oc import-image' commanda!"
+	exit
+fi
+																		
+echo
+echo "Starting a $OCP_APP_DV build, this takes some time to upload all of the product sources for build..."
+echo
+oc start-build $OCP_APP_DV --from-dir=. --follow=true --wait=true
+																		
+if [ $? -ne 0 ]; then
+	echo
+	echo "Error occurred during 'oc start-build' command!"
+	exit
+fi
+
+echo
+echo "Creating a new $OCP_APP_DV application..."
+echo
+oc new-app $OCP_APP_DV
+																				
+if [ $? -ne 0 ]; then
+	echo
+	echo "Error occurred during 'oc new-app' command!"
+	exit
+fi
+																				
+echo
+echo "Creating an externally facing route for $OCP_APP_DV by exposing a service..."
+echo
+oc expose service $OCP_APP_DV --port=8080
+																				
+if [ $? -ne 0 ]; then
+	echo
+	echo "Error occurred during 'oc expose service' command!"
+	exit
+fi
+
+echo "Setup for BPM container..."
+echo
+cp support/Dockerfile-bpms Dockerfile
+
+echo
+echo "Setting up a new $OCP_APP build..."
 echo
 oc delete bc "$OCP_APP" -n "$OCP_PRJ" >/dev/null 2>&1
 oc delete imagestreams "developer" >/dev/null 2>&1
@@ -183,7 +253,7 @@ if [ $? -ne 0 ]; then
 fi
 																		
 echo
-echo "Starting a build, this takes some time to upload all of the product sources for build..."
+echo "Starting a $OCP_APP build, this takes some time to upload all of the product sources for build..."
 echo
 oc start-build $OCP_APP --from-dir=. --follow=true --wait=true
 																		
@@ -194,7 +264,7 @@ if [ $? -ne 0 ]; then
 fi
 																								
 echo
-echo "Creating a new application..."
+echo "Creating a new $OCP_APP application..."
 echo
 oc new-app $OCP_APP
 																								
@@ -205,7 +275,7 @@ if [ $? -ne 0 ]; then
 fi
 																														
 echo
-echo "Creating an externally facing route by exposing a service..."
+echo "Creating an externally facing route for $OCP_APP by exposing a service..."
 echo
 oc expose service $OCP_APP --port=8080
 																														
