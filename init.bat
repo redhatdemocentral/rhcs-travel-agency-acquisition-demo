@@ -2,285 +2,247 @@
 setlocal
 
 set PROJECT_HOME=%~dp0
-set DEMO=JBoss BPM Suite & JDV Travel Agency Integration Demo
-set AUTHORS=Nirja Patel, Shepherd Chengeta, Van Halbert,
+set DEMO=Cloud Travel Agency Acquisition Demo
+set AUTHORS=Niraj Patel, Shepherd Chengeta, Van Halbert,
 set AUTHORS2=Andrew Block, Eric D. Schabell
-set PROJECT=git@github.com:jbossdemocentral/bpms-dv-travel-agency-integration-demo.git
-set PRODUCT=JBoss BPM Suite
-set JBOSS_HOME=%PROJECT_HOME%target\jboss-eap-6.4
-set SERVER_DIR=%JBOSS_HOME%\standalone\deployments\
-set SERVER_CONF=%JBOSS_HOME%\standalone\configuration\
-set SERVER_BIN=%JBOSS_HOME%\bin
+set PROJECT=git@github.com:redhatdemocentral/rhcs-rewards-demo.git
 set SRC_DIR=%PROJECT_HOME%installs
+set BPMS=jboss-bpmsuite-6.4.0.GA-deployable-eap7.x.zip
+set EAP=jboss-eap-7.0.0-installer.jar
+set DV=jboss-dv-6.3.0-1-installer.jar
 
-set DV_PRODUCT=JBoss DV
-set DV_JBOSS_HOME=%PROJECT_HOME%target\jboss-dv-6.2
-set DV_SERVER_DIR=%DV_JBOSS_HOME%\standalone\deployments\
-set DV_SERVER_CONF=%DV_JBOSS_HOME%\standalone\configuration\
-set DV_SERVER_BIN=%DV_JBOSS_HOME%\bin
-set DV_SRC_DIR=%PROJECT_HOME%installs
-
-set SUPPORT_DIR=%PROJECT_HOME%support
-set PRJ_DIR=%PROJECT_HOME%projects
-set BPMS=jboss-bpmsuite-installer-6.2.0.BZ-1299002.jar
-set EAP=jboss-eap-6.4.0-installer.jar
-set EAP_PATCH=jboss-eap-6.4.4-patch.zip
-set VERSION=6.2
-
-set DV=jboss-dv-installer-6.2.0.redhat-3.jar
-set DV_VERSION=6.2
-
+REM Adjust these variables to point to an OCP instance.
+set OPENSHIFT_USER=openshift-dev
+set OPENSHIFT_PWD=devel
+set HOST_IP=192.168.99.100
+set OCP_DESCRIPTION=Travel Agency Acquisition
+set OCP_PRJ=appdev-in-cloud
+set OCP_APP=travel-booking-acquisition
 
 REM wipe screen.
 cls
-GOTO :README
+
 echo.
-echo ###############################################################################
-echo ##                                                                           ##
-echo ##  Setting up the                                                           ##
-echo ##                                                                           ##
-echo ##     %DEMO%                                                      ##
-echo ##                                                                           ##
-echo ##                                                                           ##
-echo ##   ####  ####   #   #      ### #   # ##### ##### #####       ####  #    #  ##
-echo ##   #   # #   # # # # #    #    #   #   #     #   #       #   #   # #    #  ##
-echo ##   ####  ####  #  #  #     ##  #   #   #     #   ###    ###  #   # #    #  ##
-echo ##   #   # #     #     #       # #   #   #     #   #       #   #   #  #  #   ##
-echo ##   ####  #     #     #    ###  ##### #####   #   #####       ####    ##    ##
-echo ##                                                                           ##
-echo ##                                                                           ##
-echo ##  brought to you by,                                                       ##
-echo ##                                                                           ##
-echo ##         %AUTHORS%                      ##
-echo ##         %AUTHORS2%                                    ##
-echo ##                                                                           ##
-echo ##  %PROJECT% 
-echo ##                                                                           ##
-echo #################################################################################
+echo #################################################################
+echo ##                                                             ##   
+echo ##  Setting up the %DEMO%                                ##
+echo ##                                                             ##   
+echo ##                                                             ##   
+echo ##     ####  ####   #   #      ### #   # ##### ##### #####     ##
+echo ##     #   # #   # # # # #    #    #   #   #     #   #         ##
+echo ##     ####  ####  #  #  #     ##  #   #   #     #   ###       ##
+echo ##     #   # #     #     #       # #   #   #     #   #         ##
+echo ##     ####  #     #     #    ###  ##### #####   #   #####     ##
+echo ##                                                             ##   
+echo ##             #### #      ###  #   # ####                     ##
+echo ##        #   #     #     #   # #   # #   #                    ##
+echo ##       ###  #     #     #   # #   # #   #                    ##
+echo ##        #   #     #     #   # #   # #   #                    ##
+echo ##             #### #####  ###   ###  ####                     ##
+echo ##                                                             ##   
+echo ##  brought to you by,                                         ##   
+echo ##                     %AUTHORS%   ##
+echo ##                     %AUTHORS2%          ##
+echo ##                                                             ##   
+echo ##  %PROJECT%      ##
+echo ##                                                             ##   
+echo #################################################################
 echo.
 
+REM Validate OpenShift
+set argTotal=0
+
+for %%i in (%*) do set /A argTotal+=1
+
+if %argTotal% EQU 1 (
+
+    call :validateIP %1 valid_ip
+
+	if !valid_ip! EQU 0 (
+	    echo OpenShift host given is a valid IP...
+	    set HOST_IP=%1
+		echo.
+		echo Proceeding with OpenShift host: !HOST_IP!...
+	) else (
+		echo Please provide a valid IP that points to an OpenShift installation...
+		echo.
+        GOTO :printDocs
+	)
+
+)
+
+if %argTotal% GTR 1 (
+    GOTO :printDocs
+)
+
 REM make some checks first before proceeding.	
+call where oc >nul 2>&1
+if  %ERRORLEVEL% NEQ 0 (
+	echo OpenShift command line tooling is required but not installed yet... download here:
+	echo https://access.redhat.com/downloads/content/290
+	GOTO :EOF
+)
+
 if exist "%SRC_DIR%\%EAP%" (
         echo Product sources are present...
         echo.
 ) else (
-        echo Need to download %EAP% package from the Customer Support Portal
-        echo and place it in the %SRC_DIR% directory to proceed...
-        echo.
-        GOTO :EOF
-)
-
-if exist %SRC_DIR%\%EAP_PATCH% (
-        echo Product patches are present...
-        echo.
-) else (
-        echo Need to download %EAP_PATCH% package from the Customer Support Portal
+        echo Need to download %EAP% package from https://developers.redhat.com/products/eap/download
         echo and place it in the %SRC_DIR% directory to proceed...
         echo.
         GOTO :EOF
 )
 
 if exist "%SRC_DIR%\%BPMS%" (
-        echo BPMS Product sources are present...
+        echo Product sources are present...
         echo.
 ) else (
-        echo Need to download %BPMS% package from the Customer Support Portal
+        echo Need to download %BPMS% package from https://developers.redhat.com/products/bpmsuite/download
         echo and place it in the %SRC_DIR% directory to proceed...
         echo.
         GOTO :EOF
 )
 
 if exist "%SRC_DIR%\%DV%" (
-        echo DV Product sources are present...
+        echo Product DV sources are present...
         echo.
 ) else (
-        echo Need to download %DV% package from the Customer Support Portal
+        echo Need to download %DV% package from https://developers.redhat.com/products/datavirt/download
         echo and place it in the %SRC_DIR% directory to proceed...
         echo.
         GOTO :EOF
 )
 
-REM Remove the old JBoss instance, if it exists.
-if exist "%JBOSS_HOME%" (
-         echo - existing JBoss product install removed...
-         echo.
-         rmdir /s /q target"
- )
-
-REM Run installers.
-echo EAP installer running now...
+echo OpenShift commandline tooling is installed...
 echo.
-call java -jar "%SRC_DIR%/%EAP%" "%SUPPORT_DIR%\installation-eap" -variablefile "%SUPPORT_DIR%\installation-eap.variables"
-
+echo Logging in to OpenShift as %OPENSHIFT_USER%...
+echo.
+call oc login %HOST_IP%:8443 --password="%OPENSHIFT_PWD%" --username="%OPENSHIFT_USER%"
 
 if not "%ERRORLEVEL%" == "0" (
   echo.
-	echo Error Occurred During JBoss EAP Installation!
-	echo.
-	GOTO :EOF
-)
-
-call set NOPAUSE=true
-
-echo.
-echo Applying JBoss EAP patch now...
-echo.
-call %JBOSS_HOME%/bin/jboss-cli.bat --command="patch apply %SRC_DIR%/%EAP_PATCH% --override-all"
-
-if not "%ERRORLEVEL%" == "0" (
-  echo.
-	echo Error Occurred During JBoss EAP Patch Installation!
+	echo Error occurred during 'oc login' command!
 	echo.
 	GOTO :EOF
 )
 
 echo.
-echo JBoss BPM Suite installer running now...
+echo Creating a new project...
 echo.
-call java -jar "%SRC_DIR%/%BPMS%" "%SUPPORT_DIR%\installation-bpms" -variablefile "%SUPPORT_DIR%\installation-bpms.variables"
+call oc new-project %OCP_PRJ% --display-name="%OCP_DESCRIPTION%" --description="Travel agency booking application solution for data issues after acquisition of sister agency during bookings season."
+
+echo.
+echo Setting up a new build...
+echo.
+call oc delete bc %OCP_APP% -n %OCP_PRJ% >nul 2>&1
+call oc delete imagestreams developer >nul 2>&1
+call oc delete imagestreams %OCP_APP% >nul 2>&1
+call oc new-build "jbossdemocentral/developer" --name=%OCP_APP% --binary=true
 
 if not "%ERRORLEVEL%" == "0" (
-	echo Error Occurred During %PRODUCT% Installation!
+  echo.
+	echo Error occurred during 'oc new-build' command!
+	echo.
+	GOTO :EOF
+)
+
+REM need to wait a bit for new build to finish with developer image.
+timeout 10 /nobreak
+
+echo.
+echo Importing developer image...
+echo.
+call oc import-image developer
+
+if not "%ERRORLEVEL%" == "0" (
+  echo.
+	echo Error occurred during 'oc import-image' command!
 	echo.
 	GOTO :EOF
 )
 
 echo.
-echo JBoss EAP for DataVirt installer running now...
+echo Starting a build, this takes some time to upload all of the product sources for build...
 echo.
-call java -jar "%SRC_DIR%/%EAP%" "%SUPPORT_DIR%\installation-dv-eap" -variablefile "%SUPPORT_DIR%\installation-dv-eap.variables"
+call oc start-build %OCP_APP% --from-dir=. --follow=true --wait=true
 
 if not "%ERRORLEVEL%" == "0" (
   echo.
-  echo Error Occurred During JBoss EAP for DataVirt Installation!
-  echo.
-  GOTO :EOF
-)
-
-call set NOPAUSE=true
-
-echo.
-echo Applying JBoss EAP for DataVirt patch now...
-echo.
-call %DV_JBOSS_HOME%/bin/jboss-cli.bat --command="patch apply %SRC_DIR%/%EAP_PATCH% --override-all"
-
-if not "%ERRORLEVEL%" == "0" (
-  echo.
-	echo Error Occurred During JBoss EAP for DataVirt Patch Installation!
+	echo Error occurred during 'oc start-build' command!
 	echo.
 	GOTO :EOF
 )
 
 echo.
-echo JBoss DV installer running now...
+echo Creating a new application...
 echo.
-call java -jar "%SRC_DIR%/%DV%" "%SUPPORT_DIR%\installation-dv" -variablefile "%SUPPORT_DIR%\installation-dv.variables"
-
-if not "%ERRORLEVEL%" == "0" (
-	echo Error Occurred During JBoss DV Installation!
-	echo.
-	GOTO :EOF
-)
-
-echo - setting up demo projects...
-echo.
-
-echo - enabling demo accounts role setup in application-roles.properties file...
-echo.
-xcopy /Y /Q "%SUPPORT_DIR%\application-roles.properties" "%SERVER_CONF%"
-echo. 
-
-mkdir "%SERVER_BIN%\.niogit\"
-xcopy /Y /Q /S "%SUPPORT_DIR%\bpm-suite-demo-niogit\*" "%SERVER_BIN%\.niogit\"
-echo. 
-
-echo.
-echo - setting up web services...
-echo.
-call mvn clean install -f "%PRJ_DIR%/pom.xml"
+call oc new-app %OCP_APP%
 
 if not "%ERRORLEVEL%" == "0" (
   echo.
-	echo Error Building Maven Project!
+	echo Error occurred during 'oc new-app' command!
 	echo.
 	GOTO :EOF
 )
 
-
-xcopy /Y /Q "%PRJ_DIR%\acme-demo-flight-service\target\acme-flight-service-1.0.war" "%SERVER_DIR%"
-xcopy /Y /Q "%PRJ_DIR%\acme-demo-hotel-service\target\acme-hotel-service-1.0.war" "%SERVER_DIR%"
-
 echo.
-echo - adding acmeDataModel-1.0.jar to business-central.war/WEB-INF/lib
-xcopy /Y /Q "%PRJ_DIR%\acme-data-model\target\acmeDataModel-1.0.jar" "%SERVER_DIR%\business-central.war\WEB-INF\lib"
+echo Creating an externally facing route by exposing a service...
+echo.
+call oc expose service %OCP_APP% --port=8080
 
-echo.
-echo - deploying external-client-ui-form-1.0.war to EAP deployments directory
-xcopy /Y /Q "%PRJ_DIR%\external-client-ui-form\target\external-client-ui-form-1.0.war" "%SERVER_DIR%"
-
-echo.
-echo - setting up standalone.xml configuration adjustments...
-echo.
-xcopy /Y /Q "%SUPPORT_DIR%\standalone.xml" "%SERVER_CONF%"
-echo.
-
-echo - setup email task notification users...
-echo.
-xcopy /Y /Q "%SUPPORT_DIR%\userinfo.properties" "%SERVER_DIR%\business-central.war\WEB-INF\classes\"
-
-REM Optional: uncomment this to install mock data for BPM Suite
-REM
-REM echo - setting up mock bpm dashboard data...
-REM echo.
-REM xcopy /Y /Q "%SUPPORT_DIR%\1000_jbpm_demo_h2.sql" "%SERVER_DIR%\dashbuilder.war\WEB-INF\etc\sql"
-REM echo.
+if not "%ERRORLEVEL%" == "0" (
+  echo.
+	echo Error occurred during 'oc expose service' command!
+	echo.
+	GOTO :EOF
+)
 
 echo.
-echo - setting up standalone.xml configuration adjustments for DV server...
-echo.
-xcopy /Y /Q "%SUPPORT_DIR%\teiidfiles\standalone.xml" "%DV_SERVER_CONF%"
+echo ==================================================================================
+echo =                                                                                =
+echo =  For instructions on how to demo this example, see the Readme.md file.         =
+echo =                                                                                =
+echo =  Login to start exploring the Travel Agency Acquisition project:               =
+echo =                                                                                =
+echo =    http://$OCP_APP-$OCP_PRJ.$HOST_IP.nip.io/business-central  =
+echo =                                                                                =
+echo =    [ u:erics / p:jbossbpm1! ]                                                  =
+echo =                                                                                =
+echo =  Access the online Travel Agency booking web application at:                   =
+echo =                                                                                =
+echo =    http://$OCP_APP-$OCP_PRJ.$HOST_IP.nip.io/external-client-ui-form-1.0  =
+echo =                                                                                =
+echo =  Note: it takes a few minutes to expose these routes                           =
+echo =                                                                                =
+echo ==================================================================================
 echo.
 
-echo.
-echo - setting up travel VDB for DV server...
-echo.
-xcopy /Y /Q "%SUPPORT_DIR%\teiidfiles\vdb\travel-vdb.xml" "%DV_SERVER_DIR%"
-xcopy /Y /Q "%SUPPORT_DIR%\teiidfiles\vdb\travel-vdb.xml.dodeploy" "%DV_SERVER_DIR%"
-echo.
+GOTO :EOF
+      
 
-echo.
-echo - setting up travel data for DV server...
-echo.
-xcopy /Y /Q "%SUPPORT_DIR%\teiidfiles\data\flights-source-schema.sql" "%DV_SERVER_CONF%"
-xcopy /Y /Q "%SUPPORT_DIR%\teiidfiles\data\hotels-source-schema.sql" "%DV_SERVER_CONF%"
-echo.
+:validateIP ipAddress [returnVariable]
 
-echo - copy Teiid JDBC Driver ...
-echo.
-xcopy /Y /Q "%DV_JBOSS_HOME%\dataVirtualization\jdbc\teiid-8.*.jar" "%SERVER_DIR%\dashbuilder.war\WEB-INF\lib\"
+    setlocal 
 
-echo - copy flight and hotel dashboard files ...
-echo.
-xcopy /Y /Q "%SUPPORT_DIR%\teiidfiles\dashboard\*.*" "%SERVER_DIR%\dashbuilder.war\WEB-INF\deployments\"
+    set "_return=1"
 
-echo.
-echo ===============================================================================
-echo =                                                                             =
-echo =  You can now start the DV server with:                                      =
-echo =                                                                             =
-echo =   %DV_SERVER_BIN%\standalone.sh -Djboss.socket.binding.port-offset=100
-echo =                                                                             =
-echo =  You can now start the %PRODUCT% with:                                =
-echo =                                                                             =
-echo =   %SERVER_BIN%\standalone.bat                                 =
-echo =                                                                             =
-echo =  Login into business central at:                                            =
-echo =                                                                             =
-echo =    http://localhost:8080/business-central  [u:erics / p:bpmsuite1!]         =
-echo =                                                                             =
-echo =  See README.md for general details to run the various demo cases.           =
-echo =                                                                             =
-echo =  %DEMO% Setup Complete.                                           =
-echo =                                                                             =
-echo ===============================================================================
-echo.
+    echo %~1^| findstr /b /e /r "[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*" >nul
+
+    if not errorlevel 1 for /f "tokens=1-4 delims=." %%a in ("%~1") do (
+        if %%a gtr 0 if %%a lss 255 if %%b leq 255 if %%c leq 255 if %%d gtr 0 if %%d leq 254 set "_return=0"
+    )
+
+:endValidateIP
+
+    endlocal & ( if not "%~2"=="" set "%~2=%_return%" ) & exit /b %_return%
+	
+:printDocs
+  echo This project can be installed on any OpenShift platform. It's possible to
+  echo install it on any available installation by pointing this installer to an
+  echo OpenShift IP address:
+  echo.
+  echo   $ ./init.sh IP
+  echo.
+  echo If using Red Hat OCP, IP should look like: 192.168.99.100
+  echo.
+

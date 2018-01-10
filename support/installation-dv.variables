@@ -1,3 +1,4 @@
-Teiid.user.password=admin_24
 Dashboard.admin.password=admin_24
 vault.keystorepwd=admin_24
+Teiid.user.password=admin_24
+adminPassword=admin_24
