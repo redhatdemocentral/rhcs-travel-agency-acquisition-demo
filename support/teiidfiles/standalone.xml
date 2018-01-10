@@ -547,7 +547,7 @@
     <deployments>
         <deployment name="teiid-odata.war" runtime-name="teiid-odata.war">
             <fs-exploded path="dataVirtualization/vdb/teiid-odata.war/" relative-to="jboss.home.dir"/>
-        </deploymen>
+        </deployment>
         <deployment name="teiid-dashboard-builder.war" runtime-name="teiid-dashboard-builder.war">
             <fs-exploded path="dataVirtualization/teiid-dashboard/teiid-dashboard-builder.war/" relative-to="jboss.home.dir"/>
         </deployment>
