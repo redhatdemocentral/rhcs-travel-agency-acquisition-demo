@@ -1,0 +1,2 @@
+e17a7c3fe2ca3cad935b9d1e459da07fd3881bcd fba22ffb34c04e610769c01444548cc5badf9c38 Eric D. Schabell <eric@schabell.org> 1515763771 +0100	commit: added NCY, Denver to destinations. {/specialtripsagencyproject/src/main/resources/InvalidToDestination.rdrl}
+fba22ffb34c04e610769c01444548cc5badf9c38 9934b04b29734a22c3bc08416a4966a8be9430ee Eric D. Schabell <eric@schabell.org> 1515763799 +0100	commit: added NCY and Denver. {/specialtripsagencyproject/src/main/resources/InValidFromDestination.rdrl}
