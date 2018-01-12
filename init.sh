@@ -62,11 +62,11 @@ echo "##     ####  ####  #  #  #     ##  #   #   #     #   ###                  
 echo "##     #   # #     #     #       # #   #   #     #   #                        ##"
 echo "##     ####  #     #     #    ###  ##### #####   #   #####                    ##"
 echo "##                                                                            ##" 
-echo "##            ####  #   #            ###   #### #####                         ##"
-echo "##       #    #   # #   #     #     #   # #     #                             ##"
-echo "##      ###   #   # #   #    ###    #   #  ###  ###                           ##"
-echo "##       #    #   #  # #      #     #   #     # #                             ##"
-echo "##            ####    #              ###  ####  #####                         ##"
+echo "##            ####  #   #          #### #      ###  #   # ####                ##"
+echo "##       #    #   # #   #    #    #     #     #   # #   # #   #               ##"
+echo "##      ###   #   # #   #   ###   #     #     #   # #   # #   #               ##"
+echo "##       #    #   #  # #     #    #     #     #   # #   # #   #               ##" 
+echo "##            ####    #            #### #####  ###   ###  ####                ##"
 echo "##                                                                            ##"   
 echo "##  brought to you by,                                                        ##"   
 echo "##                     ${AUTHORS}           ##"
@@ -190,36 +190,14 @@ fi
 echo
 echo "Starting a $OCP_APP_DV build, this takes some time to upload all of the product sources for build..."
 echo
-oc start-build $OCP_APP_DV --from-dir=. --follow=true --wait=true
+oc start-build "$OCP_APP_DV" --from-dir=. --follow=true --wait=true
 																		
 if [ $? -ne 0 ]; then
 	echo
 	echo "Error occurred during 'oc start-build' command!"
 	exit
 fi
-
-echo
-echo "Creating a new $OCP_APP_DV application..."
-echo
-oc new-app $OCP_APP_DV
-																				
-if [ $? -ne 0 ]; then
-	echo
-	echo "Error occurred during 'oc new-app' command!"
-	exit
-fi
-																				
-echo
-echo "Creating an externally facing route for $OCP_APP_DV by exposing a service..."
-echo
-oc expose service $OCP_APP_DV --port=8080
-																				
-if [ $? -ne 0 ]; then
-	echo
-	echo "Error occurred during 'oc expose service' command!"
-	exit
-fi
-
+																			
 echo "Setup for BPM container..."
 echo
 cp support/Dockerfile-bpms Dockerfile
@@ -255,29 +233,34 @@ fi
 echo
 echo "Starting a $OCP_APP build, this takes some time to upload all of the product sources for build..."
 echo
-oc start-build $OCP_APP --from-dir=. --follow=true --wait=true
+oc start-build "$OCP_APP" --from-dir=. --follow=true --wait=true
 																		
 if [ $? -ne 0 ]; then
 	echo
 	echo "Error occurred during 'oc start-build' command!"
 	exit
 fi
-																								
+																													
 echo
-echo "Creating a new $OCP_APP application..."
+echo "Cleaning up..."
 echo
-oc new-app $OCP_APP
-																								
+rm Dockerfile
+
+echo
+echo "Creating new $OCP_APP and $OCP_APP_DV applications... grouping 2 containers in one application..."
+echo
+oc new-app "$OCP_APP" "$OCP_APP_DV" --group="$OCP_APP"+"$OCP_APP_DV"
+																				
 if [ $? -ne 0 ]; then
 	echo
 	echo "Error occurred during 'oc new-app' command!"
 	exit
 fi
-																														
+	
 echo
 echo "Creating an externally facing route for $OCP_APP by exposing a service..."
 echo
-oc expose service $OCP_APP --port=8080
+oc expose service "$OCP_APP" --port=8080
 																														
 if [ $? -ne 0 ]; then
 	echo

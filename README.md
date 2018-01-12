@@ -175,14 +175,16 @@ Released versions
 -----------------
 See the tagged releases for the following versions of the product:
 
-- v1.0 - OpenShift Container Platform 3.7, JBoss EAP 7.0, JBoss BPM Suite 6.4, JBoss DataVirt 6.1.1 and travel agency acquisition project.
+- v1.0 - OpenShift Container Platform 3.7, JBoss EAP 7.0, JBoss BPM Suite 6.4, JBoss DataVirt 6.3 and travel agency acquisition project.
 
+
+![OCP Project](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/ocp-project.png)
+
+![OCP Deployed](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/ocp-deployed.png)
 
 ![Datasource 08](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-08.png)
 
 ![Datasource 06](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-06.png)
 
 ![Datasource 09](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-09.png)
-
-![Datasource 10](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-10.png)
 

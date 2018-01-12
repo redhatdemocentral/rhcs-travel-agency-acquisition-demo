@@ -34,11 +34,11 @@ echo ##     ####  ####  #  #  #     ##  #   #   #     #   ###       ##
 echo ##     #   # #     #     #       # #   #   #     #   #         ##
 echo ##     ####  #     #     #    ###  ##### #####   #   #####     ##
 echo ##                                                             ##   
-echo ##             #### #      ###  #   # ####                     ##
-echo ##        #   #     #     #   # #   # #   #                    ##
-echo ##       ###  #     #     #   # #   # #   #                    ##
-echo ##        #   #     #     #   # #   # #   #                    ##
-echo ##             #### #####  ###   ###  ####                     ##
+echo ##           ####  #   #        #### #      ###  #   # ####    ##
+echo ##      #    #   # #   #   #   #     #     #   # #   # #   #   ##
+echo ##     ###   #   # #   #  ###  #     #     #   # #   # #   #   ##
+echo ##      #    #   #  # #    #   #     #     #   # #   # #   #   ##
+echo ##           ####    #          #### #####  ###   ###  ####    ##
 echo ##                                                             ##   
 echo ##  brought to you by,                                         ##   
 echo ##                     %AUTHORS%   ##
@@ -132,7 +132,59 @@ echo.
 call oc new-project %OCP_PRJ% --display-name="%OCP_DESCRIPTION%" --description="Travel agency booking application solution for data issues after acquisition of sister agency during bookings season."
 
 echo.
-echo Setting up a new build...
+echo Setup for DataVirt container...
+echo.
+xcopy /Y /Q support\Dockerfile-dv Dockerfile
+
+echo.
+echo Setting up a new %OCP_APP_DV% build...
+echo.
+call oc delete bc %OCP_APP_DV% -n %OCP_PRJ% >nul 2>&1
+call oc delete imagestreams developer >nul 2>&1
+call oc delete imagestreams %OCP_APP_DV% >nul 2>&1
+call oc new-build "jbossdemocentral/developer" --name=%OCP_APP_DV% --binary=true
+
+if not "%ERRORLEVEL%" == "0" (
+  echo.
+	echo Error occurred during 'oc new-build' command!
+	echo.
+	GOTO :EOF
+)
+
+REM need to wait a bit for new build to finish with developer image.
+timeout 10 /nobreak
+
+echo.
+echo Importing developer image...
+echo.
+call oc import-image developer
+
+if not "%ERRORLEVEL%" == "0" (
+  echo.
+	echo Error occurred during 'oc import-image' command!
+	echo.
+	GOTO :EOF
+)
+
+echo.
+echo Starting a %OCP_APP_DV% build, this takes some time to upload all of the product sources for build...
+echo.
+call oc start-build %OCP_APP_DV% --from-dir=. --follow=true --wait=true
+
+if not "%ERRORLEVEL%" == "0" (
+  echo.
+	echo Error occurred during 'oc start-build' command!
+	echo.
+	GOTO :EOF
+)
+
+echo.
+echo Setup for BPM container...
+echo.
+xcopy /Y /Q support\Dockerfile-bpms Dockerfile
+
+echo.
+echo Setting up a new %OCP_APP% build...
 echo.
 call oc delete bc %OCP_APP% -n %OCP_PRJ% >nul 2>&1
 call oc delete imagestreams developer >nul 2>&1
@@ -162,7 +214,7 @@ if not "%ERRORLEVEL%" == "0" (
 )
 
 echo.
-echo Starting a build, this takes some time to upload all of the product sources for build...
+echo Starting a %OCP_APP% build, this takes some time to upload all of the product sources for build...
 echo.
 call oc start-build %OCP_APP% --from-dir=. --follow=true --wait=true
 
@@ -176,7 +228,7 @@ if not "%ERRORLEVEL%" == "0" (
 echo.
 echo Creating a new application...
 echo.
-call oc new-app %OCP_APP%
+call oc new-app %OCP_APP% %OCP_APP_DV% --group=%OCP_APP%+%OCP_APP_DV%
 
 if not "%ERRORLEVEL%" == "0" (
   echo.
@@ -196,6 +248,11 @@ if not "%ERRORLEVEL%" == "0" (
 	echo.
 	GOTO :EOF
 )
+
+echo.
+echo Cleaning up...
+echo.
+call DEL Dockerfile
 
 echo.
 echo ==================================================================================
