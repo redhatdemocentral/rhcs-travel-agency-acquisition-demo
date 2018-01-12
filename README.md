@@ -23,7 +23,7 @@ Install Travel Agency Acquisition on OpenShift
  
   - or your own OpenShift installation.
 
-2. [Download and unzip this demo.](https://github.com/eschabell/rhcs-travel-agency-acquisition-demo/archive/master.zip)
+2. [Download and unzip this demo.](https://github.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/archive/master.zip)
 
 3. Add products to installs directory. For example download and add BPMS installer into the installs directory.
 
@@ -78,13 +78,13 @@ Install Travel Agency Acquisition on OpenShift
 
   - OCP example web app: http://rhcs-travel-agency-acquisition-appdev-in-cloud.192.168.99.100.nip.io/external-client-ui-form-1.0
 
-![Datasource config](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-03.png)
+![Datasource config](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-03.png)
 
-![Datasource tables](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-05.png)
+![Datasource tables](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-05.png)
 
-![Datasource 06](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-06.png)
+![Datasource 06](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-06.png)
 
-![Datasource 07](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-07.png)
+![Datasource 07](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-07.png)
 
 
 9. Want to build the Travel Agency demo from scratch? Try this hands-on <a href="https://bpmworkshop.github.io/travelagency-bpmworkshop/index.html" target="_blank">online workshop</a>.
@@ -178,13 +178,13 @@ See the tagged releases for the following versions of the product:
 - v1.0 - OpenShift Container Platform 3.7, JBoss EAP 7.0, JBoss BPM Suite 6.4, JBoss DataVirt 6.3 and travel agency acquisition project.
 
 
-![OCP Project](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/ocp-project.png)
+![OCP Project](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/ocp-project.png)
 
-![OCP Deployed](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/ocp-deployed.png)
+![OCP Deployed](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/ocp-deployed.png)
 
-![Datasource 08](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-08.png)
+![Datasource 08](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-08.png)
 
-![Datasource 06](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-06.png)
+![Datasource 06](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-06.png)
 
-![Datasource 09](https://raw.githubusercontent.com/eschabell/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-09.png)
+![Datasource 09](https://raw.githubusercontent.com/redhatdemocentral/rhcs-travel-agency-acquisition-demo/master/docs/demo-images/datasource-config-09.png)
 
