@@ -5,7 +5,7 @@ It contains multiple web services for looking up data for the process and rules 
 several tasks that can be activated to evaluate pricing and to review the final booking data before completing the booking. After
 acquiring a sister travel agency, our solution needs to remain online for the coming booking season, but we want to leverage the
 existing data model in place while linking booking information back to both travel agencies back-end data stores. Using JBoss 
-Data Virtualization we demonstrate how to update data results in both backing data stores, with resultes being viewable directly 
+Data Virtualization we demonstrate how to update data results in both backing data stores, with results being viewable directly 
 in JBoss BPM Suite BAM Dashboards. The backing services make use of disparate data sources integrated and exposed as services for 
 use in this project.
 
