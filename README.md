@@ -1,6 +1,6 @@
 AppDev in the Cloud with Travel Agency Acquisition
 ==================================================
-This demo is to install a Travel Agency process driven application in the Cloud based on the OpenShift Container Platform (OCP)
+This demo is to install a Travel Agency process driven application in the Cloud based on the OpenShift Container Platform (OCP). 
 It contains multiple web services for looking up data for the process and rules to calculate pricing. Furthermore, there are 
 several tasks that can be activated to evaluate pricing and to review the final booking data before completing the booking. After
 acquiring a sister travel agency, our solution needs to remain online for the coming booking season, but we want to leverage the
